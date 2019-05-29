@@ -10,10 +10,6 @@ namespace ParentsEyesKidsTracking.Web.Models
     public class Location
     {
         [Key]
-        [Column(Order = 0)]
-        public Kid Kid { get; set; }
-
-        [Key]
         [Column(Order = 1)]
         public DateTime Date { get; set; }
 
