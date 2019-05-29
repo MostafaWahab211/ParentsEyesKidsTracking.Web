@@ -12,6 +12,8 @@ using System.Web.Http;
 
 namespace ParentsEyesKidsTracking.Web.Controllers
 {
+    [AllowAnonymous]
+    [RoutePrefix("api/Parent")]
     public class ParentController : ApiController
     {
         private ApplicationUserManager _userManager;
@@ -27,16 +29,19 @@ namespace ParentsEyesKidsTracking.Web.Controllers
                 _userManager = value;
             }
         }
-        public async Task<IHttpActionResult> RegisterAsync(Parent parent)
+
+        [Route("Register")]
+        [HttpPost]
+        public async Task<IHttpActionResult> RegisterAsync(ParentRegestrationViewModel parent)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new Parent() { UserName = parent.Email, Email = parent.Email, Location =parent.Location, Kids = parent.Kids };
+            var user = new Parent() { UserName = parent.UserName, Email = parent.Email };
 
-            IdentityResult result = await UserManager.CreateAsync(user, parent.PasswordHash);
+            IdentityResult result = await UserManager.CreateAsync(user, parent.Password);
             
 
             if (!result.Succeeded)
@@ -46,6 +51,8 @@ namespace ParentsEyesKidsTracking.Web.Controllers
 
             return Ok();
         }
+        [Route("Update")]
+        [HttpPost]
         public IHttpActionResult Update(Parent parent)
         {
             if (ModelState.IsValid)
@@ -69,8 +76,9 @@ namespace ParentsEyesKidsTracking.Web.Controllers
             else
             {
                 return BadRequest(ModelState);
-            }        
+            }
         }
+        [Route("Remove")]
         public IHttpActionResult Remove(string id)
         {
             if (id != null)
@@ -88,6 +96,7 @@ namespace ParentsEyesKidsTracking.Web.Controllers
             else
                 return BadRequest();
         }
+        [Route("UpdateLocation")]
         public IHttpActionResult UpdateLocation(ParentLocationModelView parentLocationModelView)
         {
             if (ModelState.IsValid)

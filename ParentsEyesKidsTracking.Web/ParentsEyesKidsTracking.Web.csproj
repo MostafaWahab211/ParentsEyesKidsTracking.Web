@@ -202,6 +202,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\ModelView\KidLocationModelView.cs" />
     <Compile Include="Models\ModelView\ParentLocationModelView.cs" />
+    <Compile Include="Models\ModelView\ParentRegestrationViewModel.cs" />
     <Compile Include="Models\Parents.cs" />
     <Compile Include="Models\PushNotification.cs" />
     <Compile Include="Models\User.cs" />
