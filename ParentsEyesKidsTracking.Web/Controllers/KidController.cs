@@ -4,6 +4,7 @@ using ParentsEyesKidsTracking.Web.Models;
 using ParentsEyesKidsTracking.Web.Models.ModelView;
 using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -103,6 +104,12 @@ namespace ParentsEyesKidsTracking.Web.Controllers
                         kid.Location = kidLocationModelView.Location;
                         context.Entry<Kid>(kid).State = System.Data.Entity.EntityState.Modified;
                         context.SaveChanges();
+                    GeoCoordinate geoKid = new GeoCoordinate(kid.Location.Latitude, kid.Location.Longitude);
+                    GeoCoordinate geoParent = new GeoCoordinate(kid.Parent.Location.Latitude, kid.Parent.Location.Longitude);
+                    if(geoKid.GetDistanceTo(geoParent)>500)//specify the distance
+                    {
+                        PushNotification notification = new PushNotification("", "", "");
+                    }
                         return Ok();
                     
                 }
