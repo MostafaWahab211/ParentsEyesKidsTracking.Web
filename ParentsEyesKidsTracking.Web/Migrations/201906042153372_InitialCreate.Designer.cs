@@ -13,7 +13,7 @@ namespace ParentsEyesKidsTracking.Web.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201905291552407_InitialCreate"; }
+            get { return "201906042153372_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

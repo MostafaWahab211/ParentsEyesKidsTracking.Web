@@ -18,5 +18,9 @@ namespace ParentsEyesKidsTracking.Web.Models
 
         [Required]
         public double Latitude { get; set; }
+
+        public virtual ICollection<Kid> Kids { get; }
+
+        public virtual ICollection<Parent> Parents { get; }
     }
 }

@@ -7,12 +7,18 @@ using System.Web;
 
 namespace ParentsEyesKidsTracking.Web.Models
 {
+    [Table("Parents")]
     public class Parent:User
     {
-        
-        public Location Location { get; set; }
+     
+        public Parent()
+        {
+            Location = new Location();
+            Kids = new List<Kid>();
+        }
+        public virtual Location Location { get; set; }
 
-        public IEnumerable<Kid> Kids { get; set; }
+        public virtual ICollection<Kid> Kids { get; set; }
 
     }
 }
